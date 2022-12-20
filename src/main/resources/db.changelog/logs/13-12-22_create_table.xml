@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="1653249049514-1" author="Karpov">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints/>
+            </column>
+            <column name="price" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stock" type="BOOLEAN" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1653249418919-1" author="Karpov">
+        <createTable tableName="discount_card">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="card_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1671213416592-1" author="Karpov">
+        <createTable tableName="orders">
+
+
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+
+            <column name="total_price" type="DECIMAL">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="date_of_purchase" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP" computed="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="discount_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="discount_id" baseTableName="orders" constraintName="fk_id_discount"
+                                 referencedColumnNames="id" referencedTableName="discount_card"
+                                 deleteCascade="true"/>
+    </changeSet>
+
+    <changeSet id="1653252301260-1" author="Karpov">
+        <createTable tableName="order_products">
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="order_products" constraintName="fk_order"
+                                 referencedColumnNames="id" referencedTableName="orders"
+                                 deleteCascade="true"/>
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="order_products" constraintName="fk_product"
+                                 referencedColumnNames="id" referencedTableName="product"
+                                 deleteCascade="true"/>
+    </changeSet>
+
+
+</databaseChangeLog>
