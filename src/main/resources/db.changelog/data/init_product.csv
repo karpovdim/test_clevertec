@@ -1,0 +1,4 @@
+id,name,price,stock
+1,tv,10,false
+2,phone,3,true
+3,airpods,7,false
