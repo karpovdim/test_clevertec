@@ -18,14 +18,15 @@ JDK17
 после выполнения файл с чеком сохраниться в корневой каталог
 
 
-POST http://localhost:8080/shopping
-Content-Type: application/json
-{
-"discountCardNumber": "12835AW",
-"ShoppingCart": {
-"1": "3",
-"2": "5"
-}
+POST http://localhost:8080/shopping  
+Content-Type: application/json  
+
+{  
+"discountCardNumber": "12835AW",         
+"ShoppingCart": {  
+"1": "3",   
+"2": "5"  
+}  
 }
 
   где  "1": "3"   1- id продукта  3- количество продуктов в корзине
@@ -33,4 +34,4 @@ Content-Type: application/json
  где  "2": "5"   2- id продукта  5- количество продуктов в корзине
 
 
-   
+   Карпов Дмитрий karpov83d@gmail.com
